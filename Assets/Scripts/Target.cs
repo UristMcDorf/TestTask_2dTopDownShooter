@@ -7,8 +7,16 @@ public class Target : MonoBehaviour
     [SerializeField]
     int score = 0;
 
+    bool isHit = false;
+
     public void Hit()
     {
+        // Prevent possible multihits
+        if(isHit)
+        {
+            return;
+        }
+        isHit = true;
         Debug.Log(string.Format("{0} hit!", name));
         ScoreController.Instance.UpdateScore(score);
         Destroy(gameObject);

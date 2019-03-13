@@ -78,8 +78,6 @@ public class Gun : MonoBehaviour
             MakeBullet();
         }
 
-        Random.InitState(System.Environment.TickCount);
-        
         for(int i = 0; i < bulletsPerShot; i++)
         {
             Bullet firedBullet = bullets.Pop();
