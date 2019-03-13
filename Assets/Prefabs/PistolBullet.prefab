@@ -111,4 +111,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1672795327144964035}
   collider: {fileID: 8085254408576640894}
-  initialSpeed: 5
+  initialSpeed: 15
