@@ -6,8 +6,6 @@ public class MyCharacterController : MonoBehaviour
 {
     [SerializeField]
     float characterSpeed = 0f;
-    [SerializeField]
-    Transform spriteTransform = null;
     Rigidbody2D rigidbody2d = null;
     Vector2 movementInput = Vector2.zero;
 
@@ -19,7 +17,6 @@ public class MyCharacterController : MonoBehaviour
     void Update()
     {
         HandleMovementInput();
-        HandleMouseInput();
     }
 
     void FixedUpdate()
@@ -35,10 +32,5 @@ public class MyCharacterController : MonoBehaviour
     void HandleMovement()
     {
         rigidbody2d.AddForce(movementInput.normalized * characterSpeed);
-    }
-
-    void HandleMouseInput()
-    {
-
     }
 }
