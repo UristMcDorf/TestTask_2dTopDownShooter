@@ -42,6 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Sights
+    uniqueID: 2526012799
+    locked: 0
   - name: Obstacle
     uniqueID: 2940630771
     locked: 0
