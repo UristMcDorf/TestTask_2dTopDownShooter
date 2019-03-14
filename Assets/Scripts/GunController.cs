@@ -7,6 +7,15 @@ public class GunController : MonoBehaviour
 {
     [SerializeField]
     Image currentGunDisplay = null;
+    [SerializeField]
+    SpriteRenderer sightsLeft = null;
+    [SerializeField]
+    GameObject sightsLeftPivot = null;
+    [SerializeField]
+    SpriteRenderer sightsRight = null;
+    [SerializeField]
+    GameObject sightsRightPivot = null;
+
     Gun currentGun = null;
     List<Gun> guns = null;
 
@@ -36,16 +45,34 @@ public class GunController : MonoBehaviour
         {
             UpdateGun(1);
         }
+
+        UpdateSightsPosition();
     }
 
     void Aim()
     {
         currentGun.Aim();
+
+        sightsLeft.enabled = true;
+        sightsRight.enabled = true;
     }
 
     void Shoot()
     {
         currentGun.Shoot();
+
+        sightsLeft.enabled = false;
+        sightsRight.enabled = false;
+    }
+
+    // Should probably make some checks so it doesn't update constantly but eh.
+    void UpdateSightsPosition()
+    {
+        if(currentGun != null)
+        {
+            sightsLeftPivot.transform.localRotation = Quaternion.AngleAxis(- (currentGun.CurrentSpread / 2), Vector3.forward);
+            sightsRightPivot.transform.localRotation = Quaternion.AngleAxis(currentGun.CurrentSpread / 2, Vector3.forward);
+        }
     }
 
     void UpdateGun(int newGun)

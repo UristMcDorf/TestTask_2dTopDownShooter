@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// If I added more weird gun types I'd probably split this off into multiple components.
+
 public class Gun : MonoBehaviour
 {
     [SerializeField]
@@ -36,7 +38,15 @@ public class Gun : MonoBehaviour
     [SerializeField]
     float cooldownAfterShot = 0f;
 
-    float currentSpread = 0f;
+    float _currentSpread = 0f;
+    public float CurrentSpread
+    {
+        get
+        {
+            return _currentSpread;
+        }
+    }
+
     float cooldown = 0f;
 
     Stack<Bullet> bullets = new Stack<Bullet>();
@@ -55,16 +65,16 @@ public class Gun : MonoBehaviour
         {
             cooldown = Mathf.Max(0, cooldown - Time.deltaTime);
         }
-        if(currentSpread > 0)
+        if(_currentSpread > 0)
         {
-            currentSpread = Mathf.Max(minSpread, currentSpread - Time.deltaTime * aimRate);
+            _currentSpread = Mathf.Max(minSpread, _currentSpread - Time.deltaTime * aimRate);
         }
     }
 
     // TODO: Visualise
     public void Aim()
     {
-        currentSpread = startSpread;
+        _currentSpread = startSpread;
     }
 
     public void Shoot()
@@ -81,10 +91,10 @@ public class Gun : MonoBehaviour
         for(int i = 0; i < bulletsPerShot; i++)
         {
             Bullet firedBullet = bullets.Pop();
-            firedBullet.Fire(currentSpread);
+            firedBullet.Fire(_currentSpread);
         }
         cooldown = cooldownAfterShot;
-        currentSpread = 0f;
+        _currentSpread = 0f;
     }
 
     void MakeBullet()

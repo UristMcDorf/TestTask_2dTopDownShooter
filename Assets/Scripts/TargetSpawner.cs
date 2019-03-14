@@ -43,12 +43,12 @@ public class TargetSpawner : MonoBehaviour
 
             //Couldn't make preliminary collision detection work yet
             //do{
-                float x = Random.Range(minx, maxx);
-                float y = Random.Range(miny, maxy);
-                float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg - 90;
+            float x = Random.Range(minx, maxx);
+            float y = Random.Range(miny, maxy);
+            float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg - 90;
 
-                position = new Vector3(x, y, 0);
-                rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            position = new Vector3(x, y, 0);
+            rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 /*
                 Collider2D test = Instantiate<Collider2D>(collisionTester, position, rotation);
                 RaycastHit2D[] results = new RaycastHit2D[0];

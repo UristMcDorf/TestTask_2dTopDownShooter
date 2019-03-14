@@ -17,7 +17,6 @@ public class Target : MonoBehaviour
             return;
         }
         isHit = true;
-        Debug.Log(string.Format("{0} hit!", name));
         ScoreController.Instance.UpdateScore(score);
         Destroy(gameObject);
     }
