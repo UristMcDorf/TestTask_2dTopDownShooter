@@ -21,6 +21,8 @@ public class GunController : MonoBehaviour
     [SerializeField]
     GameObject sightsRightPivot = null;
 
+    bool isCooldownBeingDisplayed = false;
+
     Gun currentGun = null;
     List<Gun> guns = null;
 
@@ -95,13 +97,36 @@ public class GunController : MonoBehaviour
     {
         if(currentGun.Cooldown > 0f)
         {
-            currentGunDisplayScrim.enabled = true;
+            if(!isCooldownBeingDisplayed)
+            {
+                ToggleCooldownDisplay();
+            }
             currentGunDisplayCooldown.text = string.Format("{0:C1}", currentGun.Cooldown);
         }
         else
         {
-            currentGunDisplayScrim.enabled = false;
+            if(isCooldownBeingDisplayed)
+            {
+                ToggleCooldownDisplay();
+            }
             currentGunDisplayCooldown.text = "";
+        }
+    }
+
+    void ToggleCooldownDisplay()
+    {
+        isCooldownBeingDisplayed = !isCooldownBeingDisplayed;
+        currentGunDisplayScrim.enabled = isCooldownBeingDisplayed;
+        
+        if(isCooldownBeingDisplayed)
+        {
+            sightsLeft.color = Color.red;
+            sightsRight.color = Color.red;
+        }
+        else
+        {
+            sightsLeft.color = Color.blue;
+            sightsRight.color = Color.blue;
         }
     }
 }
