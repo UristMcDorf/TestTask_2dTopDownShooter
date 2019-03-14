@@ -47,7 +47,14 @@ public class Gun : MonoBehaviour
         }
     }
 
-    float cooldown = 0f;
+    float _cooldown = 0f;
+    public float Cooldown
+    {
+        get
+        {
+            return _cooldown;
+        }
+    }
 
     Stack<Bullet> bullets = new Stack<Bullet>();
 
@@ -61,9 +68,9 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        if(cooldown > 0)
+        if(_cooldown > 0)
         {
-            cooldown = Mathf.Max(0, cooldown - Time.deltaTime);
+            _cooldown = Mathf.Max(0, _cooldown - Time.deltaTime);
         }
         if(_currentSpread > 0)
         {
@@ -79,7 +86,7 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        if(cooldown > 0)
+        if(_cooldown > 0)
         {
             return;
         }
@@ -93,7 +100,7 @@ public class Gun : MonoBehaviour
             Bullet firedBullet = bullets.Pop();
             firedBullet.Fire(_currentSpread);
         }
-        cooldown = cooldownAfterShot;
+        _cooldown = cooldownAfterShot;
         _currentSpread = 0f;
     }
 

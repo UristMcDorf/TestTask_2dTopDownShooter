@@ -8,6 +8,11 @@ public class GunController : MonoBehaviour
     [SerializeField]
     Image currentGunDisplay = null;
     [SerializeField]
+    Image currentGunDisplayScrim = null;
+    [SerializeField]
+    Text currentGunDisplayCooldown = null;
+
+    [SerializeField]
     SpriteRenderer sightsLeft = null;
     [SerializeField]
     GameObject sightsLeftPivot = null;
@@ -47,6 +52,7 @@ public class GunController : MonoBehaviour
         }
 
         UpdateSightsPosition();
+        UpdateCurrentGunDisplay();
     }
 
     void Aim()
@@ -81,6 +87,21 @@ public class GunController : MonoBehaviour
         {
             currentGun = guns[newGun];
             currentGunDisplay.sprite = currentGun.DisplaySprite;
+            UpdateCurrentGunDisplay();
+        }
+    }
+
+    void UpdateCurrentGunDisplay()
+    {
+        if(currentGun.Cooldown > 0f)
+        {
+            currentGunDisplayScrim.enabled = true;
+            currentGunDisplayCooldown.text = string.Format("{0:C1}", currentGun.Cooldown);
+        }
+        else
+        {
+            currentGunDisplayScrim.enabled = false;
+            currentGunDisplayCooldown.text = "";
         }
     }
 }

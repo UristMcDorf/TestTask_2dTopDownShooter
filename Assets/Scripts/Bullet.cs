@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     float speed = 0f;
 
     bool isFired = false;
-    Gun parent = null;
+    Gun parent = null; 
 
     void Update()
     {
